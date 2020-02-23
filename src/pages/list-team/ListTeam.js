@@ -6,4 +6,4 @@ const ListTeam = () => {
   )
 } 
 
-export default ListTeam
+export default ListTeam;
