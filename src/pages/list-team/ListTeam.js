@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'reactstrap';
-import axios from 'axios';
+import { Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
-import { orderBy } from 'lodash'
+import axios from 'axios';
+import { orderBy } from 'lodash';
 
 const ListTeam = () => {
 
@@ -12,16 +13,18 @@ const ListTeam = () => {
     axios
       .get(`http://brazilian-league.herokuapp.com/teams`)
       .then(res => {
-        setData(orderBy(res.data, ['name']))
+        setData(orderBy(res.data, ['name']));
       })
-  }, [])
+  }, []);
 
   const renderRow = team => {
     return (
       <tr key={team.id}>
-        <th scope="row"><img src={team.urlLogo} style={{height: 70}}></img></th>
-        <td className="align-middle" style={{textTransform: 'uppercase'}}>{team.name}</td>
-        <th className="text-right align-middle"><Button color="info">Escalação</Button>{' '}</th>
+        <th scope="row">
+          <img alt="urlLogo" src={team.urlLogo} style={{ height: 70 }}></img>
+        </th>
+        <td className="align-middle" style={{ textTransform: 'uppercase' }}>{team.name}</td>
+        <th className="text-right align-middle"><Link to={`/teams/players/${team.id}`} className="btn btn-info">Escalação</Link></th>
       </tr>
     )
   }
